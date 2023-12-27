@@ -1,7 +1,8 @@
+export const metadata = {
+  title: "MoviesApp",
+  description: "movies app",
+};
+
 export default function Home() {
-  return (
-    <main className="text-3xl font-bold underline">
-      main
-    </main>
-  )
+  return <main className=""></main>;
 }
