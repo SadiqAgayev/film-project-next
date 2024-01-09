@@ -1,8 +1,12 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import MenuItem from "./MenuItem";
+import ThemeComp from "./ThemeComp";
+import Loading from "@/app/loading";
 
 const Header = () => {
+  const [mounted, setMounted] = useState(false)
   const menu = [
     {
       name: "About",
@@ -13,6 +17,12 @@ const Header = () => {
       url: "/login",
     },
   ];
+
+  useEffect(() => setMounted(true), [])
+
+  if (!mounted) {
+    return <Loading />
+  }
 
   return (
     <div className="flex items-center gap-7 h-20 p-5">
@@ -27,6 +37,7 @@ const Header = () => {
         />
         <BiSearch size={25} />
       </div>
+      <ThemeComp mounted={mounted} />
       {menu.map((m, i) => (
         <MenuItem m={m} key={i} />
       ))}
