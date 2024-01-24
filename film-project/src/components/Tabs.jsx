@@ -6,15 +6,19 @@ import React from "react";
 const Tabs = () => {
   const tabs = [
     {
-      name: "En Populyar",
+      name: "Now Playing",
+      url: "now_playing",
+    },
+    {
+      name: "Popular",
       url: "popular",
     },
     {
-      name: "En Son",
-      url: "latest",
+      name: "Top Rated",
+      url: "top_rated",
     },
     {
-      name: "Yaxinda Gelecekler",
+      name: "Upcoming",
       url: "upcoming",
     },
   ];
