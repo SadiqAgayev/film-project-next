@@ -1,12 +1,14 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import MenuItem from "./MenuItem";
 import ThemeComp from "./ThemeComp";
 import Loading from "@/app/loading";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const [mounted, setMounted] = useState(false)
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const menu = [
     {
       name: "About",
@@ -18,15 +20,18 @@ const Header = () => {
     },
   ];
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
     <div className="flex items-center gap-7 h-20 p-5">
-      <div className="bg-amber-600 text-white rounded-lg p-3 text-2xl font-bold">
+      <div
+        className="bg-amber-600 text-white rounded-lg p-3 text-2xl font-bold hover:cursor-pointer"
+        onClick={() => router.push("/")}
+      >
         MovieApp
       </div>
       <div className="flex flex-1 items-center gap-2 border p-3 rounded-lg">

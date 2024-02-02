@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 import React from "react";
 
 const Tabs = () => {
+  const pathname = usePathname()
   const tabs = [
     {
       name: "Now Playing",
@@ -28,7 +29,7 @@ const Tabs = () => {
       {tabs.map((tab, i) => (
         <Link
           className={`cursor-pointer hover:opacity-75 transition-opacity ${
-            tab.url === getQuery
+            tab.url === getQuery || (pathname === '/' && !getQuery && i === 0)
               ? "underline underline-offset-8 text-amber-600"
               : ""
           }`}

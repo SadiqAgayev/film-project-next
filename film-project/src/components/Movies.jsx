@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Movies = () => {
@@ -9,7 +9,6 @@ const Movies = () => {
   const searchParams = useSearchParams();
 
   const genre = searchParams.get("genre");
-  console.log(genre);
 
   useEffect(() => {
     const options = {
@@ -29,13 +28,27 @@ const Movies = () => {
         .then((response) => response.json())
         .then((response) => setPopular(response?.results))
         .catch((err) => console.error(err));
+    } else {
+      fetch(
+        `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => setPopular(response?.results))
+        .catch((err) => console.error(err));
     }
   }, [genre]);
 
+  const router = useRouter();
+
   return (
-    <div className="flex flex-wrap justify-center items-center gap-20">
+    <div className="flex flex-wrap justify-center items-center gap-20 pb-5">
       {popular?.map((p) => (
-        <div key={p.id}>
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={() => router.push(`/movie/${p.id}`)}
+          key={p.id}
+        >
           <Image
             height={400}
             width={400}
